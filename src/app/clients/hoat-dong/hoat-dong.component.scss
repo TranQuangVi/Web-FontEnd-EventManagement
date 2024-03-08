@@ -1,0 +1,44 @@
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .responsive-image {
+    max-width: 100%; /* Ảnh không vượt quá chiều rộng của container */
+    height: auto; /* Duy trì tỉ lệ chiều rộng/cao chính xác của ảnh */
+    display: block; /* Loại bỏ khoảng trắng dư thừa dưới ảnh khi làm cho ảnh là một phần tử inline */
+    margin: 0 auto; /* Canh giữa ảnh trong phần tử cha */
+  }
+  // .selected-card {
+  //   box-shadow: 0 8px 8px 8px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.14), 0 8px 8px 0 rgba(0,0,0,.12) !important;
+  //   transform: translate3d(0,0,0);
+  //   transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
+  // }
+  .show-grid {
+    .row {
+      margin: -0.5rem;
+    }
+
+    div[class^=col-] {
+      padding: 0.5rem;
+      box-sizing: border-box;
+
+      div {
+        text-align: center;
+        background-color: nb-theme(background-basic-color-2);
+        padding: 0.75rem 0.25rem;
+        border-radius: 0.25rem;
+      }
+    }
+  }
+
+  .grid-h {
+    margin-top: 1.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .table-responsive {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,62 @@
+<nb-card>
+    <nb-tabset fullWidth (changeTab)="changeTab($event)">
+        <nb-tab tabTitle="Đã đăng ký">
+            <div>
+                <nb-card-body>
+                    <ng2-smart-table [source]="source" [settings]="settings" >
+                    </ng2-smart-table>
+                    
+                  </nb-card-body>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="Đã tham gia">
+            <div class=" custom-scrollbar row show-grid">
+                <div *ngIf="listHoatDongThamGia.length > 0; else noItems"></div>
+                <div class="col-6 col-md-3" *ngFor="let hoatDong of listHoatDongThamGia">
+    
+                  <div class="card" style="height: 355px;">
+                    <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+                      <img [src]="hoatDong.hinh" (error)="handleImageError($event)" class="img-fluid"
+                        style="border-radius: 5px; width: auto; max-width: 210px; height: 165px; object-fit: contain; margin-top: -25px;" />
+                    </div>
+                    <div class="card-body" style="height: 23%;margin-top: -25px;">
+                      <h5 class="card-title shortened-text" style="font-size: 17px; margin-top: -10px;">
+                        {{hoatDong.tenHoatDong}} </h5>
+    
+                      <p class="card-text" style="margin-top: -10px;">
+                        <a nbButton matRipple status="primary" ghost
+                          style="height: 15px; font-size: 11px; ">{{hoatDong.tenLoaiHoatDong}}</a>
+    
+                        <a nbButton matRipple status="danger" ghost
+                          style="height: 18px; font-size: 11px;">{{hoatDong.tenTieuChi}}</a>
+                      </p>
+                      <div style="text-align: left; margin-top: -23px;">
+                        <p class="card-text"><b>Thời gian : </b> {{hoatDong.thoiGianBatDau}}</p>
+                        <p style=" margin-top: -10px;" class="card-text"><b>Số lượng : </b>
+                          {{hoatDong.soLuongDangKy}}/{{hoatDong.soLuongSinhVien}}</p>
+    
+                      </div>
+    
+                      <div class="row">
+                        <div class="col-6" style="text-align: center;">
+                          <a (click)="openDetail(dialogDetail,hoatDong.maHoatDong)" nbButton matRipple status="success"
+                            outline style="width: 98px;">Xem chi tiết</a>
+    
+                        </div>
+                        <div class="col-6" style="text-align: center;">
+                          <a (click)="openDanhSach(dialogDanhSach,hoatDong)" nbButton matRipple status="success" outline
+                            style="width: 98px;">DS đăng ký</a>
+                        </div>
+                      </div>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </nb-tab>
+    </nb-tabset>
+</nb-card>
+
+<ng-template #noItems>
+    <p>Không có hoạt động nào trong danh sách.</p>
+  </ng-template>

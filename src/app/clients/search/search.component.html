@@ -1,0 +1,74 @@
+<div class="noidung" style="height: 100%;width: 100%; text-align: -webkit-center;">
+    <div class="row">
+        <div class="col-md-12" *ngFor="let hoatDong of listHoatDong">
+            <nb-card
+                style="width: 70%; border-radius: 12px;  margin-top: 20px ; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 0, 0, 0.1);">
+                <nb-card-header>
+                    <div class="row">
+                        <div class="col-md-6" style="text-align: left;">
+                            <nb-user [name]="hoatDong.tenTaiKhoan"></nb-user>
+                        </div>
+                        <div class="col-md-6" style="text-align: right;">
+                            <a nbButton matRipple status="success" (click)="dangKyConfirm(hoatDong.maHoatDong)" outline
+                                 *ngIf="hoatDong.soLuongSinhVien!=hoatDong.soLuongDangKy">Đăng ký</a>
+                            <a nbButton matRipple status="success" (click)="hetLuot()" outline
+                                disabled *ngIf="hoatDong.soLuongSinhVien==hoatDong.soLuongDangKy">Đăng ký</a>
+                        </div>
+                    </div>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="card-body">
+                        <h5 class="card-title"> {{hoatDong.tenHoatDong}}</h5>
+                        <p class="card-text">
+                            <a nbButton matRipple status="primary" ghost
+                                style="height: 15px; width:100px;  ">{{hoatDong.tenTieuChi}}</a>
+                            <a nbButton matRipple status="warning" ghost
+                                style="height: 18px; width:100px;  margin-left: 5px;margin-right: 5px;">{{hoatDong.tenLoaiHoatDong}}</a>
+                        </p>
+                        <div style="text-align: left;">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p class="card-text"><b>Thời gian bắt đầu:</b> {{hoatDong.thoiGianBatDau}}</p>
+                                    <p class="card-text" style="margin-top: -10px;"><b>Địa điểm:</b> {{hoatDong.diaChi}}
+                                    </p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p class="card-text"><b>Thời gian kết thúc:</b> {{hoatDong.thoiGianKetThuc}}</p>
+
+                                </div>
+
+                            </div>
+                            <br />
+                            <div style="width: 100%;" class="card-text" style="margin-top: -10px;"><b>Mô tả:</b>
+                                <div [innerHTML]="hoatDong.moTa"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text bg-image hover-overlay" mdbRipple rippleColor="light">
+                            <img [src]="hoatDong.hinh" class="responsive-image" (error)="handleImageError($event)" />
+
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div class="row">
+                        <div class="col-md-6" style="text-align: left;">
+                            <!-- Lượt thích: 999 -->
+                        </div>
+                        <div class="col-md-6" style="text-align: right;">
+                            Số lượng còn: {{hoatDong.soLuongSinhVien-hoatDong.soLuongDangKy}}
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+
+        </div>
+        <div class="col-md-12" *ngIf="listHoatDong.length==0">
+
+            <img src="../../../assets/images/djvstock160806262new.png">
+            <br>
+            <h5>Danh sách trống...</h5>
+        </div>
+    </div>
+</div>

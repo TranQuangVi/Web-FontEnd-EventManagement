@@ -1,0 +1,30 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .styled-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .styled-table th, .styled-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+
+  .styled-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  .styled-table tr:hover {
+    background-color: #f5f5f5;
+  }
+  .responsive-image {
+    max-width: 50%; /* Ảnh không vượt quá chiều rộng của container */
+    height: auto; /* Duy trì tỉ lệ chiều rộng/cao chính xác của ảnh */
+    display: block; /* Loại bỏ khoảng trắng dư thừa dưới ảnh khi làm cho ảnh là một phần tử inline */
+    margin: 0 auto; /* Canh giữa ảnh trong phần tử cha */
+  }
+}

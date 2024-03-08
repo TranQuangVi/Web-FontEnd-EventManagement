@@ -1,0 +1,719 @@
+
+<div class="container-fluid mt--7">
+    <div class="row">
+        
+        <div class="col-8">
+            <div class="card bg-secondary shadow border-15">
+                <div class="card-header bg-white border-15">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Tài khoản</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form  #dataForm="ngForm" >
+                        <h6 class="heading-small text-muted mb-4">Thông tin cá nhân</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-hoTen">Họ tên:</label>
+                                        <input type="text" id="input-hoTen"
+                                            class="form-control form-control-alternative" placeholder="Họ tên"
+                                            [(ngModel)]="user.hoTen" name="hoTen">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-maSo">Mã số:</label>
+                                        <input type="text" id="input-maSo"
+                                            class="form-control form-control-alternative" placeholder="Mã số"
+                                            [(ngModel)]="user.maSo" name="maSo" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-gioiTinh">Giới tính:</label>
+                                        <nb-radio-group status="success" name="ng-model-group" id="input-gioiTinh"
+                                            [(ngModel)]="user.gioiTinh">
+                                            <nb-radio name="gioiTinh" value="Nam">Nam</nb-radio>
+                                            <nb-radio name="gioiTinh" value="Nữ">Nữ</nb-radio>
+                                        </nb-radio-group>
+                                        <!-- <input type="text" id="input-gioiTinh"
+                                            class="form-control form-control-alternative" placeholder="Giới tính"
+                                            [(ngModel)]="user.gioiTinh" name="gioiTinh"> -->
+                                    </div>
+                                </div>
+                                
+                               
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-ngaySinh">Ngày sinh:</label>
+                                        <input type="date" id="input-ngaySinh"
+                                            class="form-control form-control-alternative" placeholder="Ngày sinh"
+                                            [(ngModel)]="user.ngaySinh" name="ngaySinh">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Thông tin liên lạc</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Email:</label>
+                                        <input type="email" id="input-email"
+                                            class="form-control form-control-alternative"
+                                            placeholder="youremail@gmail.com"
+                                            [(ngModel)]="user.email" name="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-sdt">Số điện thoại:</label>
+                                        <input type="text" id="input-sdt"
+                                            class="form-control form-control-alternative"
+                                            placeholder="+84:"
+                                            [(ngModel)]="user.sdt" name="sdt">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-diaChi">Địa chỉ:</label>
+                                        <input id="input-diaChi" class="form-control form-control-alternative"
+                                            placeholder="Địa chỉ"
+                                            [(ngModel)]="user.diaChi" name="diaChi" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                           
+                        </div>
+                        <hr class="my-4" />
+
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0"></h3>
+                            </div>
+                            <div class="col-4 text-right">
+                                <a nbButton matRipple status="suscess" (click)="onSaveConfirm(user)">Xác nhận</a>
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
+                        <div class="pl-lg-4">
+                            <div class="form-group">
+                                <label>About Me</label>
+                                <textarea rows="4" class="form-control form-control-alternative"
+                                    placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 " style="position: fixed; top:112px; right: 0px; width: 430px; " >
+            <div class="card card-profile shadow" style="height: 282px;border-radius: 15px;" >
+                
+                <div class="row justify-content-center" >
+                    <div class="col-lg-3 order-lg-2">
+                        <div class="card-profile-image">
+                            <img [src]="user.hinh"class="rounded-circle" style="    margin-top: 59px;" (error)="handleImageError($event)">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row align-items-center"style="margin-top: 230px; margin-right:4px" >
+                    <div class="col-8">
+                        <h3 class="mb-0"></h3>
+                    </div>
+                    <div class="col-4 text-right" >
+                        <a nbButton matRipple status="suscess" (click)="open(dialogHinh)"> Thay đổi</a>
+                    </div>
+                </div>
+                <div class="card-body pt-0 pt-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                
+                                <!-- <div>
+                                    <span class="heading">22</span>
+                                    <span class="description">Friends</span>
+                                </div>
+                                <div>
+                                    <span class="heading">10</span>
+                                    <span class="description">Photos</span>
+                                </div>
+                                <div>
+                                    <span class="heading">89</span>
+                                    <span class="description">Comments</span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #dialogHinh let-data let-ref="dialogRef">
+    
+    
+    <nb-card >
+        <form #dataForm="ngForm">
+
+        <div class="card card-profile shadow" style="height: 282px;border-radius: 15px; width: 500px;" >
+                
+            <div class="row justify-content-center" >
+                <div class="">
+                    <div class="card-profile-image">
+                        <img [src]="data.hinh"class="rounded-circle" style="margin-top: 59px;" (error)="handleImageError($event)">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row align-items-center"style="margin-top: 230px; margin-right:4px" >
+                <div class="col-9">
+                    <input id="input-hinh" class="form-control form-control-alternative"
+                                            placeholder="Đường dẫn hình..."
+                                             name="hinh" type="text"   [(ngModel)]="data.hinh">
+                </div>
+                <div class="col-3 text-right" >
+                    <a nbButton matRipple status="suscess" (click)="onSaveHinh(data)">Xác nhận</a>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+    </nb-card>
+    <style>
+        @import '../../@theme/styles/themes';
+
+        
+        
+          .shadow-sm {
+            box-shadow: 0 0 .5rem rgba(136, 152, 170, .075) !important
+          }
+        
+          .card-profile-image img,
+          .shadow {
+            box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15) !important
+          }
+        
+          .shadow-lg {
+            box-shadow: 0 0 3rem rgba(136, 152, 170, .175) !important
+          }
+        
+          .shadow-none {
+            box-shadow: none !important
+          }
+        
+          .card-profile-image {
+            position: relative;
+        
+            img {
+              max-width: 180px;
+              border-radius: 50px;
+              transform: translate(-50%, -30%);
+              position: absolute;
+              left: 50%;
+        
+              &:hover {
+                transform: translate(-50%, -33%);
+              }
+            }
+          }
+        
+          .justify-content-center {
+            justify-content: center;
+          }
+        
+          .border-15 {
+            border-radius: 15px;
+          }
+        
+          .card-profile-stats {
+            padding: 1rem 0;
+        
+            >div {
+              text-align: center;
+              margin-right: 1rem;
+              padding: .875rem;
+        
+              &:last-child {
+                margin-right: 0;
+              }
+        
+              .heading {
+                font-size: 1.1rem;
+                font-weight: bold;
+                display: block;
+              }
+        
+              .description {
+                font-size: .875rem;
+                color: gray;
+              }
+            }
+          }
+        
+          .card-lift--hover {
+            &:hover {
+              transform: translateY(-20px);
+            }
+          }
+        
+          .card-blockquote {
+            padding: 2rem;
+            position: relative;
+        
+            .svg-bg {
+              display: block;
+              width: 100%;
+              height: 95px;
+              position: absolute;
+              top: -94px;
+              left: 0;
+            }
+          }
+        
+          .card-stats {
+            .card-body {
+              padding: 1rem 1.5rem;
+            }
+        
+            .card-status-bullet {
+              position: absolute;
+              top: 0;
+              right: 0;
+              transform: translate(50%, -50%);
+            }
+          }
+        
+          .card-translucent {
+            background-color: rgba(18, 91, 152, 0.08);
+          }
+        
+          .card-profile-actions {
+            padding: .875rem;
+          }
+        
+          .dropdown,
+          .dropup {
+            .dropdown-toggle::after {
+              display: none;
+            }
+        
+            .dropdown-menu {
+              .dropdown-item.active {
+                background-color: inherit;
+                color: inherit;
+                text-decoration: inherit;
+              }
+            }
+          }
+        
+          ngb-datepicker {
+            direction: ltr !important;
+        
+        
+            &,
+            & * {
+              outline: none;
+            }
+        
+            &-rtl {
+              direction: rtl;
+        
+              &.dropdown-menu {
+                left: auto;
+              }
+        
+              table tr td span {
+                float: right;
+              }
+            }
+        
+            top: 0 !important;
+            left: 0 !important;
+        
+            .bg-light {
+              background: transparent !important;
+            }
+        
+            .d-flex {
+              display: flex !important
+            }
+        
+            &:focus {
+              outline: none !important;
+            }
+        
+            .heading {
+              letter-spacing: .025em;
+              text-transform: uppercase
+            }
+        
+            .ngb-dp-header {
+              border-bottom: none !important;
+        
+              ngb-datepicker-navigation {
+                color: primary;
+        
+                .ngb-dp-arrow {
+                  justify-content: center !important;
+        
+                  &:hover {
+                    background: #e9ecef;
+                    border-radius: .375rem;
+                  }
+                }
+        
+                .ngb-dp-arrow-btn {
+                  margin: 0 !important;
+                  top: -3px;
+        
+                  .ngb-dp-navigation-chevron {
+                    width: 6px;
+                    height: 6px;
+                  }
+                }
+        
+                ngb-datepicker-navigation-select {
+                  .custom-select {
+                    font-weight: 300;
+                    border: none !important;
+                    background: transparent !important;
+                    box-shadow: none !important;
+        
+                    &:hover {
+                      background: #e9ecef !important;
+                      border-radius: .375rem;
+                    }
+                  }
+                }
+              }
+            }
+        
+            .ngb-dp-months {
+              ngb-datepicker-month-view {
+                .ngb-dp-week {
+                  border: none;
+        
+                  .ngb-dp-weekday {
+                    padding-top: 10px;
+                    opacity: 0.8;
+                    font-style: normal !important;
+                    line-height: 20px;
+                    font-weight: 300;
+                    width: 36px;
+                    height: 36px;
+                    font-size: .875rem;
+                    transition: all .15s ease;
+                    text-align: center;
+                    border: none;
+                  }
+        
+                  .small {
+                    font-size: 14px;
+                  }
+        
+                  .ngb-dp-day {
+                    font-size: .875rem;
+                    width: 36px;
+                    height: 36px;
+                    transition: all .15s ease;
+                    text-align: center;
+                    border: none;
+                    border-radius: 50%;
+        
+                    .btn-light,
+                    .custom-day {
+                      width: 36px;
+                      height: 36px;
+                      box-shadow: none;
+                      color: #525f7f;
+                      border-radius: 50%;
+                      align-items: center;
+                      display: grid;
+        
+                      &:hover,
+                      &:active {
+                        box-shadow: none;
+                        border: none;
+                        background-color: transparent;
+                      }
+        
+                      &.faded {
+                        border-radius: 0;
+                      }
+        
+                      &.range {
+                        color: white;
+        
+                        &:hover {
+                          background: #5e72e4;
+                        }
+                      }
+        
+                      &.range-start {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                      }
+        
+                      &.range-end {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                      }
+                    }
+        
+                    &:hover,
+                    &:active {
+                      box-shadow: none;
+                      border: none;
+                      background-color: transparent;
+                    }
+        
+                    .text-muted {
+                      color: #adb5bd;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        
+          .datepicker-container {
+            input option {
+              display: none;
+            }
+          }
+        
+          .custom-day.range {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            color: #fff;
+            background: #5e72e4;
+            box-shadow: none;
+            font-size: .875rem;
+            width: 36px;
+            height: 36px;
+            transition: all .15s ease;
+            text-align: center;
+            border: none;
+            border-radius: 50%;
+        
+            &.faded {
+              border-radius: 0;
+            }
+          }
+        
+          .bg-secondary {
+            background-color: #f7fafc !important
+          }
+        
+          a.bg-secondary:focus,
+          a.bg-secondary:hover,
+          button.bg-secondary:focus,
+          button.bg-secondary:hover {
+            background-color: #d2e3ee !important
+          }
+        
+          @media(min-width: 1200px) {
+            .col-xl {
+              flex-basis: 0;
+              flex-grow: 1;
+              max-width: 100%
+            }
+        
+            .col-xl-auto {
+              flex: 0 0 auto;
+              width: auto;
+              max-width: none
+            }
+        
+            .col-xl-1 {
+              flex: 0 0 8.33333333%;
+              max-width: 8.33333333%
+            }
+        
+            .col-xl-2 {
+              flex: 0 0 16.66666667%;
+              max-width: 16.66666667%
+            }
+        
+            .col-xl-3 {
+              flex: 0 0 25%;
+              max-width: 25%
+            }
+        
+            .col-xl-4 {
+              flex: 0 0 33.33333333%;
+              max-width: 33.33333333%
+            }
+        
+            .col-xl-5 {
+              flex: 0 0 41.66666667%;
+              max-width: 41.66666667%
+            }
+        
+            .col-xl-6 {
+              flex: 0 0 50%;
+              max-width: 50%
+            }
+        
+            .col-xl-7 {
+              flex: 0 0 58.33333333%;
+              max-width: 58.33333333%
+            }
+        
+            .col-xl-8 {
+              flex: 0 0 66.66666667%;
+              max-width: 66.66666667%
+            }
+        
+            .col-xl-9 {
+              flex: 0 0 75%;
+              max-width: 75%
+            }
+        
+            .col-xl-10 {
+              flex: 0 0 83.33333333%;
+              max-width: 83.33333333%
+            }
+        
+            .col-xl-11 {
+              flex: 0 0 91.66666667%;
+              max-width: 91.66666667%
+            }
+        
+            .col-xl-12 {
+              flex: 0 0 100%;
+              max-width: 100%
+            }
+        
+            .order-xl-first {
+              order: -1
+            }
+        
+            .order-xl-last {
+              order: 13
+            }
+        
+            .order-xl-0 {
+              order: 0
+            }
+        
+            .order-xl-1 {
+              order: 1
+            }
+        
+            .order-xl-2 {
+              order: 2
+            }
+        
+            .order-xl-3 {
+              order: 3
+            }
+        
+            .order-xl-4 {
+              order: 4
+            }
+        
+            .order-xl-5 {
+              order: 5
+            }
+        
+            .order-xl-6 {
+              order: 6
+            }
+        
+            .order-xl-7 {
+              order: 7
+            }
+        
+            .order-xl-8 {
+              order: 8
+            }
+        
+            .order-xl-9 {
+              order: 9
+            }
+        
+            .order-xl-10 {
+              order: 10
+            }
+        
+            .order-xl-11 {
+              order: 11
+            }
+        
+            .order-xl-12 {
+              order: 12
+            }
+        
+            .offset-xl-0 {
+              margin-left: 0
+            }
+        
+            .offset-xl-1 {
+              margin-left: 8.33333333%
+            }
+        
+            .offset-xl-2 {
+              margin-left: 16.66666667%
+            }
+        
+            .offset-xl-3 {
+              margin-left: 25%
+            }
+        
+            .offset-xl-4 {
+              margin-left: 33.33333333%
+            }
+        
+            .offset-xl-5 {
+              margin-left: 41.66666667%
+            }
+        
+            .offset-xl-6 {
+              margin-left: 50%
+            }
+        
+            .offset-xl-7 {
+              margin-left: 58.33333333%
+            }
+        
+            .offset-xl-8 {
+              margin-left: 66.66666667%
+            }
+        
+            .offset-xl-9 {
+              margin-left: 75%
+            }
+        
+            .offset-xl-10 {
+              margin-left: 83.33333333%
+            }
+        
+            .offset-xl-11 {
+              margin-left: 91.66666667%
+            }
+          }
+        
+    </style>
+</ng-template>

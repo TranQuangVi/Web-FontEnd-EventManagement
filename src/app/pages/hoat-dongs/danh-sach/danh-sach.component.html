@@ -1,0 +1,288 @@
+<div>
+  <nb-card>
+    <nb-card-body>
+
+      <nb-tabset fullWidth (changeTab)="changeTrangThai($event)">
+        <nb-tab tabTitle="{{trangthai}}" *ngFor="let trangthai of allTrangThais">
+
+          <div class=" custom-scrollbar row show-grid">
+            <div *ngIf="listHoatDong.length > 0; else noItems"></div>
+            <div class="col-6 col-md-3" *ngFor="let hoatDong of listHoatDong">
+
+              <div class="card" style="height: 355px;">
+                <div class="bg-image hover-overlay" mdbRipple rippleColor="light">
+                  <img [src]="hoatDong.hinh" (error)="handleImageError($event)" class="img-fluid"
+                    style="border-radius: 5px; width: auto; max-width: 210px; height: 165px; object-fit: contain; margin-top: -25px;" />
+                </div>
+                <div class="card-body" style="height: 23%;margin-top: -25px;">
+                  <h5 class="card-title shortened-text" style="font-size: 17px; margin-top: -10px;">
+                    {{hoatDong.tenHoatDong}} </h5>
+
+                  <p class="card-text" style="margin-top: -10px;">
+                    <a nbButton matRipple status="primary" ghost
+                      style="height: 15px; font-size: 11px; ">{{hoatDong.tenLoaiHoatDong}}</a>
+
+                    <a nbButton matRipple status="danger" ghost
+                      style="height: 18px; font-size: 11px;">{{hoatDong.tenTieuChi}}</a>
+                  </p>
+                  <div style="text-align: left; margin-top: -23px;">
+                    <p class="card-text"><b>Thời gian : </b> {{hoatDong.thoiGianBatDau}}</p>
+                    <p style=" margin-top: -10px;" class="card-text"><b>Số lượng : </b>
+                      {{hoatDong.soLuongDangKy}}/{{hoatDong.soLuongSinhVien}}</p>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6" style="text-align: center;">
+                      <a (click)="openDetail(dialogDetail,hoatDong.maHoatDong)" nbButton matRipple status="success"
+                        outline style="width: 98px;">Xem chi tiết</a>
+
+                    </div>
+                    <div class="col-6" style="text-align: center;">
+                      <a (click)="openDanhSach(dialogDanhSach,hoatDong)" nbButton matRipple status="success" outline
+                        style="width: 98px;">DS đăng ký</a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+
+    </nb-card-body>
+  </nb-card>
+
+</div>
+
+<ng-template #noItems>
+  <p>Không có hoạt động nào trong danh sách.</p>
+</ng-template>
+
+<ng-template #dialogDetail let-data let-ref="dialogRef">
+  <nb-card style="max-width:1200px ;max-height:730px ; border-radius: 12px;  margin-top: 20px;">
+    <nb-card-header>
+      <h5 class="card-title" style="font-size: 18px; text-align: center;"> {{data.tenHoatDong}}</h5>
+      <a nbButton matRipple status="primary" ghost style="height: 15px; font-size: 11px; ">Trạng thái </a>
+
+      <span *ngIf="selectedItem=='Chưa mở'">{{selectedItem}}</span>
+      <nb-select *ngIf="selectedItem!='Chưa mở'" placeholder="Basic" status="basic"
+        (selectedChange)="changeLocation($event)" [(selected)]="selectedItem">
+        <nb-option *ngFor="let trangthai of trangThais" value={{trangthai}}>{{trangthai}}</nb-option>
+      </nb-select>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="card-body">
+        <p class="card-text">
+          <a nbButton matRipple status="primary" ghost
+            style="height: 15px; width:100px; font-size: 11px; ">{{data.tenTieuChi}}</a>
+          <a nbButton matRipple status="warning" ghost
+            style="height: 18px; width:100px; font-size: 11px; margin-left: 5px;margin-right: 5px;">{{data.tenLoaiHoatDong}}</a>
+        </p>
+        <div style="text-align: left;">
+          <p class="card-text"><b>Mã hoạt động:</b> {{data.maHoatDong}} </p>
+          <p class="card-text"><b>Thời gian bắt đầu:</b> {{data.thoiGianBatDau}} </p>
+          <p class="card-text"><b>Thời gian kết thúc:</b> {{data.thoiGianKetThuc}}</p>
+          <p class="card-text"><b>Địa điểm:</b> {{data.diaChi}}</p>
+          <div style="width: 100%;" class="card-text"><b>Mô tả:</b>
+            <div [innerHTML]="data.moTa"></div>
+          </div>
+          <br>
+          <div style="width: 100%;" class="card-text"><b>Yêu cầu:</b>
+            <div [innerHTML]="data.yeuCau"></div>
+          </div>
+        </div>
+        <br>
+        <div class="card-text">
+          <p><b>Nội dung tổ chức:</b> </p>
+          <table class="styled-table">
+            <th>Tên nội dung</th>
+            <th>Nội dung</th>
+            <th>Bắt đầu</th>
+            <th>Kêt thúc</th>
+            <th>Tham gia</th>
+            <th>Vai trò</th>
+            <th>Thời lượng</th>
+            <th>Quà</th>
+            <th>Bài trình bày</th>
+            <tbody>
+              <tr *ngFor="let noidung of data.noiDungToChuc">
+                <td>{{ noidung.tenNoiDung}}</td>
+                <td>{{ noidung.noiDung}}</td>
+                <td>{{ noidung.thoiGianBatDau}}</td>
+                <td>{{ noidung.thoiGianKetThuc}}</td>
+                <td>
+              <tr style="border: white;" *ngFor="let ct of noidung.ctNoidungToChuc">
+                <td style="border: white;">{{ct.tenTaiKhoan}}</td>
+              </tr>
+              </td>
+              <td>
+                <tr style="border: white;" *ngFor="let ct of noidung.ctNoidungToChuc">
+                  <td style="border: white;" *ngIf="!ct.vaiTro">-</td>
+                  <td style="border: white;" *ngIf="ct.vaiTro">{{ct.vaiTro}}</td>
+                </tr>
+              </td>
+              <td>
+                <tr style="border: white;" *ngFor="let ct of noidung.ctNoidungToChuc">
+                  <td style="border: white;" *ngIf="!ct.thoiLuongTrinhBay">-</td>
+                  <td style="border: white;" *ngIf="ct.thoiLuongTrinhBay">{{ct.thoiLuongTrinhBay}}</td>
+                </tr>
+              </td>
+              <td>
+                <tr style="border: white;" *ngFor="let ct of noidung.ctNoidungToChuc">
+                  <td style="border: white;" *ngIf="!ct.qua">-</td>
+                  <td style="border: white;" *ngIf="ct.qua">{{ct.qua}}</td>
+                </tr>
+              </td>
+              <td>
+                <tr style="border: white;" *ngFor="let ct of noidung.ctNoidungToChuc">
+                  <td style="border: white;" *ngIf="!ct.linkBaiTrinhBay">-</td>
+                  <td style="border: white;" *ngIf="ct.linkBaiTrinhBay">{{ct.linkBaiTrinhBay}}</td>
+                </tr>
+              </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-text bg-image hover-overlay" mdbRipple rippleColor="light">
+          <img [src]="data.hinh" class="responsive-image" (error)="handleImageError($event)"
+            style="border-radius: 12px;" />
+        </div>
+      </div>
+    </nb-card-body>
+    <!-- <nb-card-footer>
+      <div class="row">
+        <div class="col-md-6" style="text-align: left;">
+          Lượt thích: 999
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          Lượt đăng ký: {{data.soLuongDangKy}}/{{data.soLuongSinhVien}}
+        </div>
+      </div>
+    </nb-card-footer> -->
+  </nb-card>
+</ng-template>
+<ng-template #dialogDanhSach let-data let-ref="dialogRef">
+  <nb-card
+    style="width: 700px; height: 646px;max-width:1000px ;max-height:730px ; border-radius: 12px;  margin-top: 20px;">
+    <nb-card-header>
+      <h5>Danh sách sinh viên đăng ký</h5>
+      <br>
+      <div class="row">
+        <div class="col-lg-12" style="text-align: center;">
+          <b>{{data.tenHoatDong}}</b>
+        </div>
+      </div>
+
+    </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table [source]="source" [settings]="settings">
+      </ng2-smart-table>
+    </nb-card-body>
+    <nb-card-footer *ngIf="data.trangThai=='Đang triển khai'">
+      <div class="row">
+        <div class="col-lg-6" style="text-align: center;">
+          <a nbButton (click)="openExcel(dialogExcel,data)"> <b>Nhập liệu excel</b></a>
+        </div>
+        <div class="col-lg-6" style="text-align: center;" >
+          <a nbButton (click)="openQRCode(dialogQrCode,data)"> <b>Quét mã điểm danh</b></a>
+        </div>
+
+      </div>
+
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+<ng-template #dialogExcel let-data let-ref="dialogRef">
+  <nb-card style="width: 700px; height: 646px;">
+    <nb-card-header style="text-align: center;">
+      <h5>Nhập liệu excel</h5>
+    </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table [source]="sourceDD" [settings]="settingsDD">
+      </ng2-smart-table>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="row">
+        <div class="col-lg-6">
+          <div>
+            <label for="file-upload" class="custom-file-upload">
+              <i class="fa fa-cloud-upload"></i> Chọn tệp
+            </label>
+            <input id="file-upload" type="file" (change)="readExcelFile($event)" />
+          </div>
+        </div>
+        <div class="col-lg-6" style="text-align: right;">
+          <a nbButton (click)="onDiemDanhExcel(data)"> <b>Xác nhận</b></a>
+        </div>
+      </div>
+
+
+    </nb-card-footer>
+  </nb-card>
+<style>
+  input[type="file"] {
+    display: none;
+  }
+  
+  /* Tạo kiểu cho button thay thế */
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+  }
+</style>
+</ng-template>
+<ng-template #dialogQrCode let-data let-ref="dialogRef">
+  <nb-card style="width: 700px; height: 646px;">
+    <nb-card-header style="text-align: center;">
+      <h5>Quét mã điểm danh</h5>
+    </nb-card-header>
+    <zxing-scanner [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event,data)"
+      [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+      (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+  </nb-card>
+
+</ng-template>
+<style>
+  .responsive-image {
+    max-width: 50%;
+    /* Ảnh không vượt quá chiều rộng của container */
+    height: auto;
+    /* Duy trì tỉ lệ chiều rộng/cao chính xác của ảnh */
+    display: block;
+    /* Loại bỏ khoảng trắng dư thừa dưới ảnh khi làm cho ảnh là một phần tử inline */
+    margin: 0 auto;
+    /* Canh giữa ảnh trong phần tử cha */
+  }
+
+  .styled-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+
+  .styled-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  .styled-table tr:hover {
+    background-color: #f5f5f5;
+  }
+</style>

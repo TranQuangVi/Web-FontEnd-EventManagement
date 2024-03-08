@@ -1,0 +1,71 @@
+@import '../../../@theme/styles/themes';
+@include nb-install-component() {
+  input[type="file"] {
+    display: none;
+  }
+  
+  /* Tạo kiểu cho button thay thế */
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+  }
+  .responsive-image {
+    max-width: 50%; /* Ảnh không vượt quá chiều rộng của container */
+    height: auto; /* Duy trì tỉ lệ chiều rộng/cao chính xác của ảnh */
+    display: block; /* Loại bỏ khoảng trắng dư thừa dưới ảnh khi làm cho ảnh là một phần tử inline */
+    margin: 0 auto; /* Canh giữa ảnh trong phần tử cha */
+  }
+  .shortened-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  nb-card {
+    transform: translate3d(0, 0, 0);
+    max-width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: block;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .custom-scrollbar {
+    padding: nb-theme(sidebar-padding);
+    overflow-y: scroll; /* Cho phép cuộn theo chiều dọc */
+    height: 800px; /* Độ dài thanh cuộn */
+    width: 104%;
+    -webkit-overflow-scrolling: touch;
+    @include nb-scrollbars(
+        nb-theme(sidebar-scrollbar-color),
+        nb-theme(sidebar-scrollbar-background-color),
+        nb-theme(sidebar-scrollbar-width)
+      );
+  }
+  .show-grid {
+    .row {
+      margin: -0.5rem;
+    }
+
+    div[class^=col-] {
+      padding: 0.5rem;
+      box-sizing: border-box;
+
+      div {
+        text-align: center;
+        background-color: nb-theme(background-basic-color-2);
+        padding: 0.75rem 0.25rem;
+        border-radius: 0.25rem;
+      }
+    }
+  }
+}

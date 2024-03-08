@@ -1,0 +1,149 @@
+<nb-card>
+    <nb-card-header>
+        <div class=" row">
+            <div class="col-lg-6">
+                Danh sách tài khoản
+            </div>
+            <div class="col-lg-6" style="text-align: -webkit-right;">
+                <button nbButton matRipple status="success" outline (click)="open(dialogTao)"
+                    style="width: 20%; text-align: center;">Mới</button>
+            </div>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <nb-tabset fullWidth (changeTab)="changeTab($event)">
+            <nb-tab tabTitle="{{chucvu}}" *ngFor="let chucvu of chucVus">
+                <ng2-smart-table [source]="source" [settings]="settings">
+                </ng2-smart-table>
+            </nb-tab>
+        </nb-tabset>
+
+    </nb-card-body>
+</nb-card>
+
+<ng-template #dialogTao let-data let-ref="dialogRef">
+    <form #dataForm="ngForm">
+        <nb-card>
+            <nb-card-header style="text-align: center; width: 1200px;">
+                <b style="font-size:24px;">Tạo tài khoản</b>
+            </nb-card-header>
+            <nb-card-body style="max-height:620px">
+                <div class="card-body">
+                    <form #dataForm="ngForm">
+                        <h6 class="heading-small text-muted mb-4">Thông tin cá nhân</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-hoTen">Họ tên:<span
+                                                style="color: red;">(*)</span></label>
+                                        <input type="text" id="input-hoTen"
+                                            class="form-control form-control-alternative" placeholder="Họ tên"
+                                            [(ngModel)]="data.hoTen" name="hoTen">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-maSo">Mã số:<span
+                                                style="color: red;">(*)</span></label>
+                                        <input type="text" id="input-maSo" class="form-control form-control-alternative"
+                                            placeholder="Mã số" [(ngModel)]="data.maSo" name="maSo">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-gioiTinh">Giới tính:</label>
+                                        <nb-radio-group status="success" name="ng-model-group" id="input-gioiTinh"
+                                            [(ngModel)]="data.gioiTinh">
+                                            <nb-radio name="gioiTinh" value="Nam">Nam</nb-radio>
+                                            <nb-radio name="gioiTinh" value="Nữ">Nữ</nb-radio>
+                                        </nb-radio-group>
+                                        <!-- <input type="text" id="input-gioiTinh"
+                                            class="form-control form-control-alternative" placeholder="Giới tính"
+                                            [(ngModel)]="data.gioiTinh" name="gioiTinh"> -->
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-ngaySinh">Ngày sinh:</label>
+                                        <input type="date" id="input-ngaySinh"
+                                            class="form-control form-control-alternative" placeholder="Ngày sinh"
+                                            [(ngModel)]="data.ngaySinh" name="ngaySinh">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Thông tin liên lạc</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Email:</label>
+                                        <input type="email" id="input-email"
+                                            class="form-control form-control-alternative"
+                                            placeholder="youremail@gmail.com" [(ngModel)]="data.email" name="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-sdt">Số điện thoại:</label>
+                                        <input type="text" id="input-sdt" class="form-control form-control-alternative"
+                                            placeholder="+84:" [(ngModel)]="data.sdt" name="sdt">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-diaChi">Địa chỉ:</label>
+                                        <input id="input-diaChi" class="form-control form-control-alternative"
+                                            placeholder="Địa chỉ" [(ngModel)]="data.diaChi" name="diaChi" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <h6 class="heading-small text-muted mb-4">Chức vụ<span style="color: red;">(*)</span></h6>
+                        <div class="pl-lg-4">
+
+
+                            <nb-radio-group status="success" name="ng-model-group" id="input-maChucVu"
+                                [(ngModel)]="data.maChucVu">
+                                <nb-radio name="maChucVu" value="GIANGVIEN">Giảng viên</nb-radio>
+                                <nb-radio name="maChucVu" value="SINHVIEN">Sinh viên</nb-radio>
+                            </nb-radio-group>
+
+                        </div>
+                        <hr class="my-4" />
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0"></h3>
+                            </div>
+                            <div class="col-4 text-right">
+                                <button left nbButton matRipple (click)="onSaveConfirm(data) " status="success"
+                                    outline>Lưu</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </nb-card-body>
+
+        </nb-card>
+    </form>
+
+</ng-template>

@@ -1,0 +1,18 @@
+
+
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .zoom-icon {
+    transition: transform 0.2s ease-in-out;
+    font-size: 25px;
+  }
+  
+  .zoom-icon:hover {
+    transform: scale(1.4); /* Chọn tỷ lệ phóng to phù hợp với yêu cầu của bạn */
+  }
+  nb-card {
+    max-width: 600px;
+    max-height: 500px;
+  }
+}

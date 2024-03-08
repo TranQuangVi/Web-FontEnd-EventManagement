@@ -1,0 +1,167 @@
+<!-- <button nbButton matRipple (click)="open2(dialog) " status="success" outline>Xem</button> -->
+<div style="text-align: center;">
+    <nb-icon icon="eye-outline" (click)="open2(dialog) " status="success" class="zoom-icon"></nb-icon>
+</div>
+<ng-template #dialog let-data let-ref="dialogRef">
+    <form #dataForm="ngForm" (ngSubmit)="onSaveConfirm(dataForm)">
+
+        <nb-card>
+            <nb-card-header style="text-align: center; width: 1200px;">
+                <b style="font-size:24px;">Thông tin</b>
+            </nb-card-header>
+            <nb-card-body style="max-height:600px; width: 1240px;">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <nb-card>
+                            <!-- <nb-card-header> Tên hoạt động: {{ data.tenHoatDong }}</nb-card-header> -->
+                            <nb-card-body>
+                                <p>Mã hoạt động:</p>
+                                <input type="text" nbInput fullWidth placeholder="Mã hoạt động"
+                                    [(ngModel)]="data.maHoatDong" name="maHoatDong">
+                                <p></p>
+                                <p>Tên hoạt động:</p>
+                                <input type="text" nbInput fullWidth placeholder="Tên hoạt động"
+                                    [(ngModel)]="data.tenHoatDong" name="tenHoatDong">
+                                <p></p>
+                                <div class="full-name-inputs">
+                                    <p></p>
+                                    <p>Loại hoạt động: </p>
+                                    <input type="text" nbInput fullWidth placeholder="Loại hoạt động "
+                                        [(ngModel)]="data.maLoaiHoatDong" name="maLoaiHoatDong">
+                                    <p></p>
+
+                                    <p>Tiêu chí:</p>
+                                    <input type="text" nbInput fullWidth placeholder="Tiêu chí"
+                                        [(ngModel)]="data.maTieuChi" name="maTieuChi">
+                                </div>
+
+                                <p></p>
+                                <p>Số lượng tối đa:</p>
+                                <input type="number" nbInput fullWidth placeholder="Số lượng tối đa"
+                                    [(ngModel)]="data.soLuongSinhVien" name="soLuongSinhVien"  min="0" max="5000">
+
+                                <p></p>
+                                <p>Yêu cầu:</p>
+                                <textarea hidden [(ngModel)]="yeuCau" name="yeuCau"></textarea>
+                                <cus-tiny-mce [(ngModel)]="yeuCau" name="yeuCau"></cus-tiny-mce>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                    <div class="col-lg-6">
+                        <nb-card>
+                            <nb-card-body>
+                                <p>Trạng thái:</p>
+                                <input type="text" nbInput fullWidth placeholder="Trạng thái"
+                                    [(ngModel)]="data.trangThai" name="trangThai">
+                                <p></p>
+                                <p>Địa điểm:</p>
+                                <input type="text" nbInput fullWidth placeholder="Địa điểm" [(ngModel)]="data.diaChi"
+                                    name="diaChi">
+                                <p></p>
+                                <p>Thời gian bắt đầu:</p>
+                                <input type="datetime-local" nbInput fullWidth placeholder="Thời gian bắt đầu"
+                                    [(ngModel)]="data.thoiGianBatDau" name="thoiGianBatDau">
+                                <p></p>
+                                <p>Thời gian bắt đầu:</p>
+                                <input type="datetime-local" nbInput fullWidth placeholder="Thời gian kết thúc"
+                                    [(ngModel)]="data.thoiGianKetThuc" name="thoiGianKetThuc">
+                                <p></p>
+                                <p>Hình ảnh</p>
+
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <input type="text" nbInput fullWidth placeholder="Link hình"
+                                            [(ngModel)]="data.hinh" name="hinh">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <img [src]="data.hinh" (error)="handleImageError($event)"
+                                            style="max-width: 90px; height: auto; max-height: 60px;">
+
+                                    </div>
+                                </div>
+
+                                <p></p>
+                                <p>Mô tả:</p>
+                                <textarea hidden [(ngModel)]="moTa" name="moTa"></textarea>
+                                <cus-tiny-mce [(ngModel)]="moTa" name="moTa"></cus-tiny-mce>
+
+                            </nb-card-body>
+
+                        </nb-card>
+
+                    </div>
+
+                </div>
+                <nb-card>
+                    <div style="text-align: center; max-width:1200px; font-size:24px;">
+                        <nb-tabset fullWidth (changeTab)="changeTab()">
+                            <nb-tab tabTitle="Nội dung">
+
+                                <ng2-smart-table [source]="sourceNoidung" [settings]="settings"
+                                    (deleteConfirm)="onDeleteConfirm($event) " (editConfirm)="onEditConfirm($event)"
+                                    (createConfirm)="onCreateConfirm($event)">
+                                </ng2-smart-table>
+
+                            </nb-tab>
+                            <nb-tab tabTitle="Người tham gia">
+                                <div *ngFor="let item of sourceNguoi.data; let i = index">
+                                    <h6 style="text-align: left;padding-top: 15px;">{{i+1}}: {{item.tenNoiDung}}</h6>
+                                    <div style="padding-left: 50px;">
+                                        <ng2-smart-table [source]="dataSourceArray[i]" [settings]="settingsNguoi"
+                                        (deleteConfirm)="onDeleteCTConfirm($event) " (editConfirm)="onEditCTConfirm($event)"
+                                        (createConfirm)="onCreateCTConfirm($event,item.maNoiDung)">
+                                    </ng2-smart-table>
+                                    </div>
+                                    
+                                <br>
+                                </div>
+                                
+                            </nb-tab>
+                        </nb-tabset>
+
+                    </div>
+                </nb-card>
+            </nb-card-body>
+
+            <nb-card-footer style=" padding-top:10px;">
+                <div class="row">
+                    <div class="col-lg-6 " style="text-align: center; ">
+                        <button right nbButton matRipple (click)="onDeleteHoatDongConfirm($event) "
+                            (click)="ref.close()" status="danger" outline>Xóa</button>
+                        <button left nbButton matRipple (click)="onSaveHoatDongConfirm(data) " status="success"
+                            outline>Lưu</button>
+
+                    </div>
+                    <div class="col-lg-6 " style="text-align: center;">
+                        <button right nbButton matRipple (click)="ref.close()" status="danger" outline>Thoát</button>
+
+                    </div>
+                </div>
+            </nb-card-footer>
+        </nb-card>
+    </form>
+
+</ng-template>
+
+<ng-template #disabledEsc let-data>
+    <div class="row">
+        <div class="col-lg-6 " style="text-align: center; ">
+            <button left nbButton matRipple status="danger" outline (click)="cancelConfirm(context=data)">Xác nhận
+            </button>
+
+        </div>
+        <div class="col-lg-6 " style="text-align: center;">
+            <button right nbButton matRipple status="success" outline (click)="ref.close()">Hủy</button>
+
+        </div>
+    </div>
+</ng-template>
+
+<script>
+    tinymce.init({
+        selector: 'textarea1#default',  // change this value according to your HTML
+        plugin: 'a_tinymce_plugin',
+        a_plugin_option: true,
+        a_configuration_option: 400
+    });
+</script>

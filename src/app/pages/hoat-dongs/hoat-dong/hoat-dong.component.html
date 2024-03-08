@@ -1,0 +1,111 @@
+<nb-card>
+  <nb-card-header>
+    <div class=" row">
+      <div class="col-lg-6">
+        Hoạt động
+      </div>
+      <div  class="col-lg-6" style="text-align: -webkit-right;">
+        <!-- <button nbButton matRipple status="success" outline (click)="open(dialog1)"
+          style="width: 20%; text-align: center;">Mới</button> -->
+      </div>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [source]="source" [settings]="settings" >
+    </ng2-smart-table>
+    
+  </nb-card-body>
+</nb-card>
+<ng-template #dialog1 let-data let-ref="dialogRef">
+  <form #dataForm="ngForm">
+
+    <nb-card>
+      <nb-card-header style="text-align: center; width: 1200px;">
+        <b style="font-size:24px;">Tạo hoạt động mới</b>
+      </nb-card-header>
+      <nb-card-body style="max-height:600px">
+        <div class="row">
+          <div class="col-lg-6">
+            <nb-card>
+              <!-- <nb-card-header> Tên hoạt động: {{ data.tenHoatDong }}</nb-card-header> -->
+              <nb-card-body>
+                <p>Mã hoạt động:</p>
+                <input type="text" nbInput fullWidth placeholder="Mã hoạt động" [(ngModel)]="data.maHoatDong"
+                  name="maHoatDong">
+                <p></p>
+                <p>Tên hoạt động:</p>
+                <input type="text" nbInput fullWidth placeholder="Tên hoạt động" [(ngModel)]="data.tenHoatDong"
+                  name="tenHoatDong">
+                <p></p>
+                <div class="full-name-inputs">
+                  <p></p>
+                  <p>Loại hoạt động: </p>
+                  <input type="text" nbInput fullWidth placeholder="Loại hoạt động " [(ngModel)]="data.loaiHoatDongId"
+                    name="maLoaiHoatDong">
+                  <p></p>
+
+                  <p>Tiêu chí:</p>
+                  <input type="text" nbInput fullWidth placeholder="Tiêu chí" [(ngModel)]="data.tieuChiId"
+                    name="maTieuChi">
+                </div>
+                <p></p>
+                <p>Yêu cầu:</p>
+                <textarea hidden [(ngModel)]="yeuCau" name="yeuCau"></textarea>
+                <cus-tiny-mce [(ngModel)]="yeuCau" name="yeuCau"></cus-tiny-mce>
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <div class="col-lg-6">
+            <nb-card>
+              <nb-card-body>
+                <p>Số lượng tối đa:</p>
+                <input type="number" nbInput fullWidth placeholder="Số lượng tối đa" [(ngModel)]="data.soLuongSinhVien"
+                  name="soLuongSinhVien">
+                <p></p>
+                <p>Địa điểm:</p>
+                <input type="text" nbInput fullWidth placeholder="Địa điểm" [(ngModel)]="data.diaChi" name="diaChi">
+                <p></p>
+                <p>Thời gian bắt đầu:</p>
+                <input type="datetime-local" nbInput fullWidth placeholder="Thời gian bắt đầu" [(ngModel)]="data.thoiGianBatDau"
+                  name="thoiGianBatDau">
+                <p></p>
+                <p>Thời gian kết thúc:</p>
+                <input type="datetime-local" nbInput fullWidth placeholder="Thời gian kết thúc" [(ngModel)]="data.thoiGianKetThuc"
+                  name="thoiGianKetThuc">
+                <p></p>
+                <p>Mô tả:</p>
+                <textarea hidden [(ngModel)]="moTa" name="moTa"></textarea>
+                <cus-tiny-mce [(ngModel)]="moTa" name="moTa"></cus-tiny-mce>
+
+
+
+              </nb-card-body>
+
+            </nb-card>
+
+          </div>
+
+        </div>
+
+
+      </nb-card-body>
+
+      <nb-card-footer style=" padding-top:10px;">
+
+        <div class="row">
+          <div class="col-lg-6 " style="text-align: center; ">
+            <button left nbButton matRipple (click)="onSaveHoatDongConfirm(data) " status="success" outline>Lưu</button>
+
+          </div>
+          <div class="col-lg-6 " style="text-align: center;">
+            <button right nbButton matRipple (click)="ref.close()" status="danger" outline>Thoát</button>
+
+          </div>
+        </div>
+
+      </nb-card-footer>
+    </nb-card>
+  </form>
+
+</ng-template>

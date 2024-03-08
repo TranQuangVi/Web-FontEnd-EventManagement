@@ -1,0 +1,137 @@
+<!-- <div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-body>
+                <div class="row show-grid">
+                    <div class="col-6 col-md-4">
+                        <div class="card" style="height: 570px;">
+                            <div class="bg-image hover-overlay" mdbRipple rippleColor="light" >
+                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp"
+                                    class="img-fluid" style="border-radius: 12px;"/>
+                            </div>
+                            <div class="card-body" style="height: 23%;">
+                                <h5 class="card-title" style="font-size: 18px;">HỘI THẢO: "QUẢN LÝ DỰ ÁN HIỆU QUẢ & QUY
+                                    TRÌNH PHÁT TRIỂN PHẦN
+                                    MỀM" </h5>
+                                <p class="card-text">
+                                    <a nbButton matRipple status="primary" ghost
+                                        style="height: 15px; width:100px; font-size: 11px; ">Tiêu chí</a>
+                                    <a nbButton matRipple status="warning" ghost
+                                        style="height: 18px; width:100px; font-size: 11px; margin-left: 5px;margin-right: 5px;">Loại
+                                        hoạt động</a>
+                                    <a nbButton matRipple status="danger" ghost
+                                        style="height: 18px; width:100px; font-size: 11px;">Số lượng còn</a>
+                                </p>
+                                <div style="text-align: left;">
+                                    <p class="card-text"><b>Thời gian:</b> 7h30 - 11h30 Thứ 6, 20/10/2023.</p>
+                                    <p class="card-text" style="margin-top: -10px;"><b>Địa điểm:</b> Phòng E1-02.04, Thu
+                                        Duc Campus.</p>
+                                </div>
+
+                            </div>
+                            <div class="nb-card-header">
+                                <a href="#!" nbButton matRipple status="success" outline>Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+</div> -->
+
+<ng-template #templateRef>
+
+    <span>Hello, Popover!</span>
+    <span>Hello, Popover!</span>
+    <span>Hello, Popover!</span>
+
+</ng-template>
+<!-- <div class="noidung" style="height: 100%; text-align: -webkit-center;">
+    <nb-card>
+        <div style="top: 75px; left: 256px; border:rgba(0,0,0,0.05);box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);display: flex;justify-content: space-evenly;
+            position: fixed; width: 1280px;   max-height: 9%; height: 9%;z-index:100;  background-color: white;">
+
+            <a placeholder="Semi-round" shape="semi-round" nbButton matRipple status="primary" ghost
+                [nbPopover]="templateRef" nbPopoverPlacement="bottom"
+                style="background-color:white;margin-top: 15px; height: fit-content;">Tiêu chí</a>
+            <a placeholder="Semi-round" shape="semi-round" nbButton matRipple status="primary" ghost
+                [nbPopover]="templateRef" nbPopoverPlacement="bottom"
+                style="background-color:white;margin-top: 15px; height: fit-content;">Loại HĐ</a>
+            <a placeholder="Semi-round" shape="semi-round" nbButton matRipple status="primary" ghost
+                [nbPopover]="templateRef" nbPopoverPlacement="bottom"
+                style="background-color:white;margin-top: 15px; height: fit-content;">Thời gian</a>
+            </div>
+    </nb-card>
+</div> -->
+<div class="noidung" style="height: 100%;width: 100%; text-align: -webkit-center;">
+    <div class="row">
+        <div class="col-md-12" *ngFor="let hoatDong of listHoatDong">
+            <nb-card
+                style="width: 70%; border-radius: 12px;  margin-top: 20px ; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 0, 0, 0.1);">
+                <nb-card-header>
+                    <div class="row">
+                        <div class="col-md-6" style="text-align: left;">
+                            <nb-user [name]="hoatDong.tenTaiKhoan"></nb-user>
+                        </div>
+                        <div class="col-md-6" style="text-align: right;">
+                            <a nbButton matRipple status="success" (click)="dangKyConfirm(hoatDong.maHoatDong)" outline
+                                 *ngIf="hoatDong.soLuongSinhVien!=hoatDong.soLuongDangKy">Đăng ký</a>
+                            <a nbButton matRipple status="success" (click)="hetLuot()" outline
+                                disabled *ngIf="hoatDong.soLuongSinhVien==hoatDong.soLuongDangKy">Đăng ký</a>
+                        </div>
+                    </div>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="card-body">
+                        <h5 class="card-title"> {{hoatDong.tenHoatDong}}</h5>
+                        <p class="card-text">
+                            <a nbButton matRipple status="primary" ghost
+                                style="height: 15px; width:100px;  ">{{hoatDong.tenTieuChi}}</a>
+                            <a nbButton matRipple status="warning" ghost
+                                style="height: 18px; width:100px;  margin-left: 5px;margin-right: 5px;">{{hoatDong.tenLoaiHoatDong}}</a>
+                        </p>
+                        <div style="text-align: left;">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p class="card-text"><b>Thời gian bắt đầu:</b> {{hoatDong.thoiGianBatDau}}</p>
+                                    <p class="card-text" style="margin-top: -10px;"><b>Địa điểm:</b> {{hoatDong.diaChi}}
+                                    </p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p class="card-text"><b>Thời gian kết thúc:</b> {{hoatDong.thoiGianKetThuc}}</p>
+
+                                </div>
+
+                            </div>
+                            <br />
+                            <div style="width: 100%;" class="card-text" style="margin-top: -10px;"><b>Mô tả:</b>
+                                <div [innerHTML]="hoatDong.moTa"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text bg-image hover-overlay" mdbRipple rippleColor="light">
+                            <img [src]="hoatDong.hinh" class="responsive-image" (error)="handleImageError($event)" />
+
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div class="row">
+                        <div class="col-md-6" style="text-align: left;">
+                            <!-- Lượt thích: 999 -->
+                        </div>
+                        <div class="col-md-6" style="text-align: right;">
+                            Số lượng còn: {{hoatDong.soLuongSinhVien-hoatDong.soLuongDangKy}}
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+
+        </div>
+    </div>
+</div>
